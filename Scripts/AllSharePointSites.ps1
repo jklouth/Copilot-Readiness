@@ -51,13 +51,20 @@ $export = Read-Host "Would you like to export the list of sites to a CSV file? (
 if ($export -eq "y")
 {
     $path = Read-Host "Please enter the path to the CSV file"
-    $site | Select-Object -Property Title, Owner, URL, SharingCapability, SiteDefinedSharingCapability, DisableSharingForNonOwnerStatus, LastContentModifiedDate, Status, Template, StorageUsed | Export-CSV $path
 }
 else
 {
     Write-Host "Exiting script."
     exit
 }
+
+#Ask the user what they would like to name the file (do not include an extension)
+$filename = read-host "What would you like to name the file? (Do not include an extension)"
+
+# Append .csv to the $filename variable and export to the location in $path
+$site | Select-Object -Property Title, Owner, URL, SharingCapability, SiteDefinedSharingCapability, DisableSharingForNonOwnerStatus, LastContentModifiedDate, Status, Template, StorageUsed | Export-CSV Path "$path\$filename.csv"
+
+
 #Ask the user if they would like to quit or exit to the main menu
 $quit = Read-Host "Would you like to quit or exit to the main menu? (quit/menu)"
 if ($quit -eq "quit")

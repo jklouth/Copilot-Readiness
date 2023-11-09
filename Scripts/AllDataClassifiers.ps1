@@ -47,8 +47,14 @@ $export = read-host "Would you like to export the data to a CSV file? (Y/N)"
 # If the user selects Y, export the data to a CSV file to a path of their choice
 if ($export -eq "Y") {
     $path = read-host "Please enter the path you would like to export the data to"
-    $DataClassifiers | Export-Csv -NoTypeInformation -Path $path
 }
+
+# Ask the user what they would like to name the file (do not include an extension)
+$filename = read-host "What would you like to name the file? (Do not include an extension)"
+
+# Append the .csv extension to the $filename variable and export to the location in $path
+$DataClassifiers | Export-Csv -NoTypeInformation -Path "$path\$filename.csv"
+
 # Disconnect from Exchange Online
 Disconnect-ExchangeOnline
 # Ask the user if they would like to exit or return to the main menu

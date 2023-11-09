@@ -45,8 +45,14 @@ $export = read-host "Would you like to export the data to a CSV file? (Y/N)"
 # If the user selects Y, export the data to a CSV file to a path of their choice
 if ($export -eq "Y") {
     $path = read-host "Please enter the path you would like to export the data to"
-    $Teams | Select-Object -Property DisplayName, Description, Visbility, MailNickName, Classification, Archived | Export-Csv -NoTypeInformation -Path $path
 }
+
+# Ask the user what they would like to name the file (do not include an extension)
+$filename = read-host "What would you like to name the file? (Do not include an extension)"
+
+# Append .csv to the $filename variable and export to the location in $path
+$Teams | Select-Object -Property DisplayName, Description, Visbility, MailNickName, Classification, Archived | Export-CSV Path "$path\$filename.csv"
+
 # Disconnect from Teams
 Disconnect-MicrosoftTeams
 # Ask the user if they would like to exit or return to the main menu

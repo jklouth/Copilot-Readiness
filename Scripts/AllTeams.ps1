@@ -38,8 +38,9 @@ else {
 # If the Teams PowerShell module is installed, continue with the script
 # Connect to Teams PowerShell
 Connect-MicrosoftTeams
+
 # Get all Teams and create a variable to store them
-$Teams = Get-Team | Select-Object -Property DisplayName, Description, Visbility, MailNickName, Classification, Archived
+$Teams = Get-Team -Property -Property DisplayName, Description, Visbility, MailNickName, Classification, Archived
 # Ask user if they would like to export the data to a CSV file
 $export = read-host "Would you like to export the data to a CSV file? (Y/N)"
 # If the user selects Y, export the data to a CSV file to a path of their choice
@@ -51,10 +52,11 @@ if ($export -eq "Y") {
 $filename = read-host "What would you like to name the file? (Do not include an extension)"
 
 # Append .csv to the $filename variable and export to the location in $path
-$Teams | Select-Object -Property DisplayName, Description, Visbility, MailNickName, Classification, Archived | Export-CSV Path "$path\$filename.csv"
+$Teams | Select-Object -Property DisplayName, Description, Visbility, MailNickName, Classification, Archived | Export-CSV -Path "$path\$filename.csv"
 
 # Disconnect from Teams
 Disconnect-MicrosoftTeams
+
 # Ask the user if they would like to exit or return to the main menu
 $exit = read-host "Would you like to exit or return to the main menu? (Exit/Menu)"
 # If the user selects Exit, exit the script

@@ -25,7 +25,7 @@ Date:   November 7, 2023
 #>
 Install-Module -Name MicrosoftTeams -Force
  
-Connect-MicrosoftTeams -AccountId <UPN>
+Connect-MicrosoftTeams
  
 $AllTeams = (Get-Team).GroupID
 $TeamList = @()

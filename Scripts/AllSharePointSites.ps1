@@ -62,7 +62,7 @@ else
 $filename = read-host "What would you like to name the file? (Do not include an extension)"
 
 # Append .csv to the $filename variable and export to the location in $path
-$site | Select-Object -Property Title, Owner, URL, SharingCapability, SiteDefinedSharingCapability, DisableSharingForNonOwnerStatus, LastContentModifiedDate, Status, Template, StorageUsed | Export-CSV Path "$path\$filename.csv"
+$site | Select-Object -Property Title, Owner, URL, SharingCapability, SiteDefinedSharingCapability, DisableSharingForNonOwnerStatus, LastContentModifiedDate, Status, Template, StorageUsed | Export-CSV -Path "$path\$filename.csv"
 
 
 #Ask the user if they would like to quit or exit to the main menu
